@@ -1,5 +1,5 @@
 insert into customers 
-(email, password)
+(email, password, admin)
 values 
-($1, $2)
+($1, $2, false)
 returning customer_id, email;

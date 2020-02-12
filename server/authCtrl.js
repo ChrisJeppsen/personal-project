@@ -1,36 +1,48 @@
-const bcrypt = require('bcrypt.js')
+const bcrypt = require('bcryptjs')
 
 
 module.exports = {
+    getCustomer: (req, res) => {
+        console.log('hit')
+        if(req.session.user) {
+            res.status(200).send(req.session.user)
+        } else {
+            res.status(200).send('no user logged in')
+        }
+
+    
+    },
     register: async(req, res) => {
         const {email, password} = req.body
-        const {db} = req.app.get('db')
-        const {session} = req
+        const db = req.app.get('db')
+        
 
+console.log(email)
 
-
-        let user = await db.user.check_customer(email)
+        let user = await db.users.check_customer(email)
         if(user[0]){
+            console.log(user)
             return res.status(400).send('customer already exists')
         }
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
+        const newUser = await db.users.register_customer(email, hash)
 
-        let newUser = await db.cart.create_order(newUser[0].customer_id);
+        let userCart = await db.cart.create_order(newUser[0].customer_id);
         let sessionUser = {...newUser[0], ...userCart[0]};
-        session.user = sessionUser
-        res.status(201).send(session.user)
+        req.session.user = sessionUser
+        res.status(201).send(req.session.user)
     },
     login: async(req, res) => {
         const {email, password} = req.body
-        const {db} = req.app.get('db')
+        const db = req.app.get('db')
         const {session} = req
 
-        let user = await db.user.check_customer(email)
+        let user = await db.users.check_customer(email)
         if(!user[0]){
-            return res.status(400).send('user not found')
+            return res.status(400).send('email not found')
         }
-        const authorized = bcrypt.compareSync(password, user[0])
+        const authorized = bcrypt.compareSync(password, user[0].password)
         if(!authorized){
             return res.status(401).send('password is incorrect')
         }

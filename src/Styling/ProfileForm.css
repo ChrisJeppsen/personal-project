@@ -1,0 +1,34 @@
+.profile_form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%
+}
+.settings_form{
+    height: 600px;
+    width: 80%;
+    background: gray;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.profile_change_container{
+    height: 400px;
+    width: 70%;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.profile_change_inputs{
+    height: 20px;
+    width: 200px;
+    box-shadow: 3px 3px black;
+}
+ 
+.profile_pic{
+    margin-top: 30px;
+}

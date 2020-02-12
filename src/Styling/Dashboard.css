@@ -7,6 +7,7 @@
    display: flex;
    align-items: center;
    justify-content: space-around;
+   position: relative;
 
 
  }
@@ -17,15 +18,17 @@
    display: flex;
    align-items: center;
    font-size: 75px;
+   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
  }
 
  #dashboard_logo{
-   height: 100px;
-   width: 100px;
-   background-color: gray;
+   height: 40px;
+   width: 50px;
+   background-color: white;
    display: flex;
    align-items: center;
    justify-content: center;
+   
  }
  .dashboard_box{
    height: 177px;
@@ -59,3 +62,54 @@
  h4{
    font-size: 30px;
  }
+ #profile_pic{
+   position: absolute;
+   bottom: 50px;
+   right: 30px;
+   z-index: 1;
+  }
+ .profile_pic{
+  height: 100px;
+   width: 100px;
+   border-radius: 50%;
+   background-color: white;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ #profile_img{
+   position: absolute;
+   z-index: 1;
+     }
+ .profile_img{
+   height:100px;
+   width: 100px;
+   border-radius: 50%;
+ }
+ #drop_down{
+   height:200px;
+   width:100px;
+   background-color: black;
+   position: absolute;
+   top: 50px;
+   border-radius: 0px 0px 50px 50px;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+   
+   
+ }
+ #logo_script{
+   height:10px;
+   width: 50px;
+   color: white;
+ }
+ #drop_down_filler{
+   height:75px;
+   width:100px;
+   background-color: black;
+ }
+ 
+ 
