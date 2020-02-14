@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 import '../Styling/Dashboard.css'
 import {connect} from 'react-redux'
-import {getCustomer} from '../ducks/auth_reducer'
-// import axios from 'axios'
+import {getCustomer, getCustomerOnSession} from '../ducks/auth_reducer'
+import axios from 'axios'
+import {FiLogOut} from 'react-icons/fi'
+import backgroundImg from '../assets/IMG_1694_edited.jpg'
+
 
 
 class Dashboard extends Component{
@@ -11,11 +14,26 @@ class Dashboard extends Component{
         super()
 
         this.state = {
-            toggleProfile: false
+            dropDownClass: 'drop_down'
         }
     }
-componentDidMount(){
-    console.log(this.props)
+// componentDidUpdate(){
+//     console.log('hit cdm');
+    
+//     axios.get('/auth/customerOnSess').then(res => {
+//         getCustomerOnSession(res.data)
+//     })
+// }
+toggleDropDown = () => {
+        if(this.state.dropDownClass === 'drop_down'){
+        this.setState({
+            dropDownClass: 'drop_down drop_open'
+        })
+    } else {
+        this.setState({
+            dropDownClass: 'drop_down'
+        })
+    }
 }
  
 render(){
@@ -32,12 +50,15 @@ render(){
                      </div>
                     ) : (
                     <div>
-                        <div className='profile_pic' id='profile_pic' onClick={!this.state.toggleProfile}>
-                            <img className='profile_img' id='profile_img'src={customer.image_url || 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'}/>
-                            <div id='drop_down'>
+                        <FiLogOut id='logout_icon'/>
+
+                        <div className='profile_pic' id='profile_pic'>
+                             <img onClick={() => this.toggleDropDown()}className='profile_img' id='profile_img'src={customer.image_url || 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'}/>
+                            <div className={this.state.dropDownClass}>
                                 <div id='drop_down_filler'></div>
                                 <p id='logo_script'>Profile</p>
-                                <Link to='/settings'><p id='logo_script'y>Settings</p></Link>
+                                <Link to='/settings'><p id='logo_script'>Settings</p></Link>
+                                <Link onClick={() => axios.post('/auth/logout').then(() => this.props.history.push('/form'))}><p id ='logo_script'>Logout</p></Link>
                                  
                             </div>
                         </div>
@@ -45,23 +66,26 @@ render(){
                     </div>
                     )}
                 </div>
-                <div className='dashboard_box'>
-                    <Link to='/about' className='dashboard_buttons'>About</Link>
-                    <div className="filler"></div>
-                </div>
-                    
-                <div className='dashboard_box'>
-                    <div className="filler"></div>
-                    <Link to='/products' className='dashboard_buttons'>Gallary</Link>
-                </div>
-                    
-                <div className='dashboard_box'>
-                    <Link to='/allPrints' className='dashboard_buttons'>Prints</Link>
-                    <div className="filler"></div>
-                </div>
-                <div className='dashboard_box'>
-                    <div className="filler"></div>
-                    <Link className='dashboard_buttons'>Hello</Link>
+                
+                <div id='background_img'>
+                    <div className='dashboard_box'>
+                        <Link to='/about' className='dashboard_buttons'>About</Link>
+                        <div className="filler"></div>
+                    </div>
+                        
+                    <div className='dashboard_box'>
+                        <div className="filler"></div>
+                        <Link to='/products' className='dashboard_buttons'>Gallary</Link>
+                    </div>
+                        
+                    <div className='dashboard_box'>
+                        <Link to='/allPrints' className='dashboard_buttons'>Prints</Link>
+                        <div className="filler"></div>
+                    </div>
+                    <div className='dashboard_box'>
+                        <div className="filler"></div>
+                        <Link className='dashboard_buttons'>Hello</Link>
+                    </div>
                 </div>
                 
             </div>

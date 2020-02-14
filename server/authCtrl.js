@@ -53,5 +53,56 @@ console.log(email)
     logout: (req, res) => {
         req.session.destroy()
         res.sendStatus(200)
+    },
+    editPassword: async (req, res) => {
+        const db = req.app.get('db')
+        const {newPassword} = req.body
+
+        if(req.session.user){
+            
+            const salt = bcrypt.genSaltSync(10)
+            const hash = bcrypt.hashSync(newPassword, salt)
+            const user = await db.users.edit_customer(hash)
+
+            delete user[0].password
+            res.status(200).send(req.session.user)
+            
+        }
+    },
+    editImg: async (req, res) => {
+        const db = req.app.get('db')
+        const {profileImg} = req.body
+        if(req.session){
+            console.log(req.session)
+        const id = req.session.user.customer_id
+
+        req.session.user.image_url = profileImg
+        console.log(req.session)
+        await db.users.edit_profile_img(profileImg, id)
+        res.status(200).send(req.session.user)
+        }
+        // res.status(400).send('no session found')
+    },
+    checkPassword: async (req, res) => {
+        const db = req.app.get('db')
+        const {currentPassword} = req.body
+        console.log(currentPassword)
+        const {email} = req.session.user
+
+        const user = await db.users.check_customer(email)
+        const authorized = bcrypt.compareSync(currentPassword, user[0].password)
+        if(!authorized){
+             res.status(200).send('password does not match')
+        }
+        delete user[0].password
+        req.session.user = user
+        res.status(200).send(req.session.user)
+    },
+    customerOnSess: (req, res) => {
+        if(req.session){
+            res.status(200).send(req.session.user)
+        } else {
+        res.status(400).send('no user logged in')
+        }
     }
 }

@@ -27,4 +27,8 @@ massive(CONNECTION_STRING).then(db => {
 app.post('/auth/register', authCtrl.register)
 app.post('/auth/login', authCtrl.login)
 app.get('/auth/customer', authCtrl.getCustomer)
+app.get('/auth/customerOnSess', authCtrl.customerOnSess)
 app.post('/auth/logout', authCtrl.logout)
+app.post('/auth/changePassword', authCtrl.editPassword)
+app.put('/auth/editImg', authCtrl.editImg)
+app.post('/auth/checkPassword', authCtrl.checkPassword)

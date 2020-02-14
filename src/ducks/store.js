@@ -3,7 +3,7 @@ import promiseMiddleware from 'redux-promise-middleware';
 import authreducer from './auth_reducer'
 
 const rootReducer = combineReducers({
-    authreducer
+    authreducer,
 })
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware))
