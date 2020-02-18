@@ -1,0 +1,12 @@
+.gallery_container{
+height: 731px; 
+width: 100%;
+
+position: sticky;
+top: 0px;
+}
+.gallery_img{
+    height: 731px;
+    width: 100%;
+}
+ 

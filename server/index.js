@@ -80,4 +80,5 @@ app.put('/auth/editImg', authCtrl.editImg)
 //PRODUCT ENDPOINTS
 
 app.get('/api/products', productCtrl.allProducts)
+app.post('/api/addProducts', productCtrl.addProducts)
 
