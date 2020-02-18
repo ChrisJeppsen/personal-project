@@ -129,6 +129,15 @@
  background-image: url('../assets/IMG_1694_edited.jpg');
  background-size: cover;
  }
- 
-  
+ .slide_closed_left{
+  transform: translateX(100vw);
+  transition: all 150ms ease;
+ }
+ .slide_closed_right{
+   transform: translateX(-100vh);
+   transition: all 150ms ease;
+ }
+ .open {
+  transform: translateX(0);
+ }  
  

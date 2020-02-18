@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
+import '../Styling/About.css'
+import {withRouter} from 'react-router-dom'
 
-function About(props){
+class About extends Component{
+    constructor(){
+        super()
+
+        this.state ={
+            aboutContainer: 'slide_open'
+        }
+    }
+    componentDidMount(){
+         setTimeout(() => {this.setState({
+            aboutContainer: 'slide_open open'
+        })}, 100);
+        
+     }
+    componentWillUnmount() {
+        this.setState({
+            aboutContainer: 'slide_open closed'
+        })
+    }
+    render(){
     return(
-        <div>
+        <div className={this.state.aboutContainer}>
             <div className='about_header'>
             <h4>About Nick</h4>
             <div id='about_logo'></div>
+            <button onClick={ () => {
+                             this.setState({ aboutContainer: 'slide_open' },()=>   setTimeout(()=>this.props.history.push('/'), 50))
+                         
+                        }
+                        }
+                            // to='/about' 
+                            className='dashboard_buttons'>About</button>
             </div>
              
             <p>
@@ -13,6 +41,7 @@ function About(props){
             </p>
 
         </div>
-    )
+        )
+    }
 }
-export default About
+export default withRouter(About)

@@ -1,22 +1,38 @@
-import React from 'react';
+import React, {Component} from 'react';
  // import './App.css';
 // import Dashboard from './Components/Dashboard'
 import {HashRouter} from 'react-router-dom'
-import routes from './routes'
+import Routes from './Routes'
 import {Provider} from 'react-redux'
 import store from './ducks/store'
 
-function App() {
-  return (
-    <Provider store={store}>
-      <HashRouter>
-        <div className="App">
-          {/* <Dashboard/> */}
-          {routes}
-        </div>
-      </HashRouter>
-    </Provider>
-  );
+ 
+
+
+ 
+class App extends Component {
+  constructor(props){
+    super(props)
+
+     this.state = {}
+
+   
+  }
+  render(){
+    return (
+     
+          <Provider store={store}>
+            <HashRouter>
+              <div className="App">
+                {/* <Dashboard/> */}
+                <Routes/>
+              </div>
+            </HashRouter>
+          </Provider>
+          
+    );
+  }
 }
+
 
 export default App;

@@ -1,0 +1,10 @@
+.slide_open{
+    transition: all 150ms ease;
+    transform: translateX(-100vw);
+   }
+.open {
+    transform: translateX(0);
+   }
+.closed {
+    transform: translateX(100vw);
+}

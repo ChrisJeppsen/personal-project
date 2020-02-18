@@ -15,6 +15,9 @@ class Form extends Component{
             password: ''
         }
     }
+    componentDidMount(){
+        
+    }
 
     handleInput = (e) => {
         const {name, value} = e.target

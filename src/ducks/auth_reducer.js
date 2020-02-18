@@ -9,8 +9,7 @@ const GET_CUSTOMER = 'GET_CUSTOMER'
 const GET_CUSTOMER_ON_SESSION = 'GET_CUSTOMER_ON_SESSION'
 
 export const getCustomer = (customer) => {
-    console.log(customer)
-    return {
+     return {
         type: GET_CUSTOMER,
         payload: customer
     }
