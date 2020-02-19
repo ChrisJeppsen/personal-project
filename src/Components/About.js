@@ -33,7 +33,7 @@ class About extends Component{
                         }
                         }
                             // to='/about' 
-                            className='dashboard_buttons'>About</button>
+                            >About</button>
             </div>
              
             <p>

@@ -81,4 +81,5 @@ app.put('/auth/editImg', authCtrl.editImg)
 
 app.get('/api/products', productCtrl.allProducts)
 app.post('/api/addProducts', productCtrl.addProducts)
+app.delete('/api/deleteProduct/:id', productCtrl.deleteProduct)
 

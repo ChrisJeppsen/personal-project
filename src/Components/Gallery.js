@@ -16,8 +16,10 @@ class Gallery extends Component{
             description: '',
             price: 0,
             productImg: '',
-             
-
+            delete: false,
+            id: '',
+            hightlighted: 'gallery_img selected',
+            prints: []
         }
     }
 
@@ -40,6 +42,32 @@ class Gallery extends Component{
         axios.post('/api/addProducts', {name, productImg, description, price}).then(res => {
             this.props.history.push('/gallery')
         })
+        axios.get('/api/products').then(res => {
+          this.props.getProducts(res.data)
+        })
+        this.setState({
+          name: '',
+          description: '',
+          price: 0,
+          productImg: ''
+        })
+    }
+    handleToggle = (id) => {
+      console.log('hit', id)
+      this.setState({
+        delete: !this.state.delete,
+        id
+      })
+    }
+    handleDelete = () => {
+      const {id} = this.state
+      console.log(id)
+      axios.delete(`/api/deleteProduct/${id}` ).then(res => {
+        
+      })
+      axios.get('/api/products').then(res => {
+        this.props.getProducts(res.data)
+      })
     }
     
     getSignedRequest = ([file]) => {
@@ -97,8 +125,15 @@ class Gallery extends Component{
         
             const product = this.props.products.map((e, i) =>  (
 
-                    <div className='gallery_container'>
+                    <div onClick={() => this.props.customer.admin === true && this.handleToggle(e.product_id)} className='gallery_container'>
                          <img className='gallery_img' src={e.product_image}/>
+                         {/* {this.state.delete && 
+                         <div className='delete_modal'> 
+                           <div className='delete_box'> Are you sure you want to delete? </div>
+                           <button onClick={() => this.handleDelete(this.state.id)}>Yes</button>
+                           <button>No</button>
+                         </div>
+                         } */}
                     </div>
                 ))
              return (
@@ -106,21 +141,28 @@ class Gallery extends Component{
                     <div>
                         {this.props.customer.admin === true ? (
                         <div> 
-                        <input onChange={(e) => this.handleInput(e)} name='name' value={this.state.name}/>
-                        <input type='file' onChange={(e) => this.getSignedRequest(e.target.files)}/>
-                        <input onChange={(e) => this.handleInput(e)} name='description' value={this.state.description}/>
-                        <input onChange={(e) => this.handleInput(e)} name='price' value={this.state.price}/>
-                        <button onClick={() => this.handleSubmit()}>add photo</button>
-                        <div className='gallery_container' > 
-                            <div >{product} </div>
-                            <button>edit</button>
-                            <button>delete</button>
-                        </div>
+                          <input onChange={(e) => this.handleInput(e)} name='name' value={this.state.name}/>
+                          <input type='file' onChange={(e) => this.getSignedRequest(e.target.files)}/>
+                          <input onChange={(e) => this.handleInput(e)} name='description' value={this.state.description}/>
+                          <input onChange={(e) => this.handleInput(e)} name='price' value={this.state.price}/>
+                          <button onClick={() => this.handleSubmit()}>add photo</button>
+                          <div className='gallery_container'> 
+                          {this.state.delete && (
+                            <div className='delete_modal'> 
+                            <div className='delete_box'> Are you sure you want to delete? </div>
+                            <button onClick={() => this.handleDelete(this.state.id)}>Yes</button>
+                            <button onClick={() => this.handleToggle()}>No</button>
+                          </div>
+                          )}
+                              <div > 
+                                {product} 
+                              </div>
+                          </div>
                         </div>
                         ) : (
                         
                         <div className='gallery_container' > 
-                            <div >{product} </div>
+                            <div ><div onClick={() => this.props.history.push('/')}className='gallery_button'>Back</div>{product} </div>
                         </div>
                          
                         

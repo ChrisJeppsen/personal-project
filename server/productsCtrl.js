@@ -11,6 +11,14 @@ module.exports = {
 
         product = await db.products.add_product(name, productImg, description, price)
         res.status(200).send(product)
+    },
+    deleteProduct: (req, res) => {
+        const db = req.app.get('db')
+        console.log(req.params)
+        const {id} = req.params
+
+        db.products.delete_product(id)
+        res.sendStatus(200)
     }
 
 }
