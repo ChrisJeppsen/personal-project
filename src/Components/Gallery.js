@@ -18,7 +18,6 @@ class Gallery extends Component{
             productImg: '',
             delete: false,
             id: '',
-            hightlighted: 'gallery_img selected',
             prints: []
         }
     }
@@ -52,13 +51,43 @@ class Gallery extends Component{
           productImg: ''
         })
     }
-    handleToggle = (id) => {
+    handleDeleteToggle = (id) => {
       console.log('hit', id)
       this.setState({
         delete: !this.state.delete,
         id
       })
     }
+    handlePrintToggle = (i, id) => {
+      if(this.state[`class${i}`] === 'highlighted selected'){
+        let newPrints = this.state.prints
+        let index = newPrints.indexOf(id)
+        newPrints.splice(index, 1)
+        this.setState({
+          [`class${i}`]: 'highlighted',
+          prints: newPrints
+        })
+        console.log(this.state.prints)
+      } else {
+        let newPrints = this.state.prints
+        newPrints.push(id)
+        this.setState({
+          [`class${i}`]: 'highlighted selected',
+          prints: newPrints
+        })
+        console.log(this.state.prints)
+      }
+    }
+    //submits prints to change the value of prints in DB to true
+    handlePrints = (i) => {
+      const {prints} = this.state
+      axios.put('/api/printsToggle', {prints}).then(res => {
+        this.setState({
+          prints: []
+        })
+      })
+    }
+    
     handleDelete = () => {
       const {id} = this.state
       console.log(id)
@@ -122,20 +151,18 @@ class Gallery extends Component{
          });
      };
      render(){ 
-        
-            const product = this.props.products.map((e, i) =>  (
-
-                    <div onClick={() => this.props.customer.admin === true && this.handleToggle(e.product_id)} className='gallery_container'>
-                         <img className='gallery_img' src={e.product_image}/>
-                         {/* {this.state.delete && 
-                         <div className='delete_modal'> 
-                           <div className='delete_box'> Are you sure you want to delete? </div>
-                           <button onClick={() => this.handleDelete(this.state.id)}>Yes</button>
-                           <button>No</button>
-                         </div>
-                         } */}
+        console.log(this.props)
+            const product = this.props.products.map((e, i) =>  {
+               
+              return(
+                <div className={this.state[`class${i}`] || 'highlighed'} 
+                onKeyDown={() => this.props.customer.admin === true && this.handleDeleteToggle(e.product_id)} 
+                onClick={() => this.props.customer.admin === true && this.handlePrintToggle(i, e.product_id)}>
+                      <img id={e.product_image} className='gallery_img' src={e.product_image}/>
                     </div>
-                ))
+                )
+              }
+              )
              return (
                   
                     <div>
@@ -146,12 +173,13 @@ class Gallery extends Component{
                           <input onChange={(e) => this.handleInput(e)} name='description' value={this.state.description}/>
                           <input onChange={(e) => this.handleInput(e)} name='price' value={this.state.price}/>
                           <button onClick={() => this.handleSubmit()}>add photo</button>
+                          <button onClick={() => this.handlePrints(this.state.prints)}>Add</button>
                           <div className='gallery_container'> 
                           {this.state.delete && (
                             <div className='delete_modal'> 
                             <div className='delete_box'> Are you sure you want to delete? </div>
                             <button onClick={() => this.handleDelete(this.state.id)}>Yes</button>
-                            <button onClick={() => this.handleToggle()}>No</button>
+                            <button onClick={() => this.handleDeleteToggle()}>No</button>
                           </div>
                           )}
                               <div > 

@@ -68,23 +68,15 @@ class Dashboard extends Component {
 
                                     </div>
                                 </div>
-                                {/* <button  onClick={() => axios.post('/auth/logout').then(() => this.props.history.push('/about'))}>Logout</button> */}
                             </div>
                         )}
                 </div>
 
                 <div id='background_img'>
                     <div className='dashboard_box'>
-                        <Link onClick={ () => {
-                             this.setState({ dashboardContainer: 'slide_open open' },()=>   setTimeout(()=>this.props.history.push('/about'), 50))
-                         
-                        }
-                        }
-                            // to='/about' 
-                            className='dashboard_buttons'>About</Link>
+                        <Link onClick={ () => {this.setState({ dashboardContainer: 'slide_open open' },()=>   setTimeout(()=>this.props.history.push('/about'), 50))}} className='dashboard_buttons'>About</Link>
                         <div className="filler"></div>
                     </div>
-
                     <div className='dashboard_box'>
                         <div className="filler"></div>
                         <Link to='/gallery' className='dashboard_buttons'>Gallery</Link>

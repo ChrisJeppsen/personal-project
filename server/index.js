@@ -6,6 +6,7 @@ const express = require('express'),
         app = express(),
         authCtrl = require('./authCtrl')
         productCtrl = require('./productsCtrl')
+        cartCtrl = require('./cartCtrl')
 
         
 app.use(express.json())
@@ -82,4 +83,9 @@ app.put('/auth/editImg', authCtrl.editImg)
 app.get('/api/products', productCtrl.allProducts)
 app.post('/api/addProducts', productCtrl.addProducts)
 app.delete('/api/deleteProduct/:id', productCtrl.deleteProduct)
+app.post('/api/printsToggle', productCtrl.printsToggle)
+
+//CART ENDPOINTS 
+
+app.post('/api/addToCart', cartCtrl.addToCart)
 

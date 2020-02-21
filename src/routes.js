@@ -26,7 +26,6 @@ class Routes extends Component{
       }
     
     getPathDepth(location) {
-          console.log(location)
         let pathArr = location.pathname.split('/')
         pathArr = pathArr.filter(n => n !== '');
         return pathArr.length;
@@ -45,7 +44,7 @@ class Routes extends Component{
                         <Route exact path ='/' component={Dashboard}></Route>
                         <Route path ='/about' component={About}></Route>
                         <Route path = '/cart' component={Cart}></Route>
-                        <Route path = '/products' component={Products}></Route>
+                        <Route path = '/allPrints' component={Products}></Route>
                         <Route path = '/form' component={Form}></Route>
                         <Route path = '/settings' component={ProfileForm}></Route>
                         <Route path = '/gallery' component={Gallery}></Route>

@@ -1,16 +1,19 @@
-.gallery_container{
+.highlighed{
     height: auto; 
     width: 100%;
-    
-     
-
-position: sticky;
+    position: sticky;
     top: 0px;
+    
 }
+ 
 .gallery_img{
     height: auto;
     width: 100%;
     object-fit: cover;
+}
+
+.selected{
+    opacity: .5;
 }
 .gallery_button{
     height: 30px; 

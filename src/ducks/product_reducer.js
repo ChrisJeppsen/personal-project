@@ -16,8 +16,8 @@ export const getProducts = (products) => {
 }
 
 export default function productreducer (state = initialState, action) {
+    console.log(action.payload)
     const {type, payload} = action
-    console.log(payload)
     switch(type){
         case GET_PRODUCTS:
             return {...state, products: payload}

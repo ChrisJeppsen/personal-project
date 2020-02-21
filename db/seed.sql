@@ -17,7 +17,7 @@ price decimal;
 
 create table order_items 
 order_item_id serial primary key
-customer_order_id int references customers(customer_id)
+customer_order_id int references customer_order(customer_order_id)
 product_id int references products(product_id)
 qty int
 price int;
