@@ -74,7 +74,7 @@ class Dashboard extends Component {
 
                 <div id='background_img'>
                     <div className='dashboard_box'>
-                        <Link onClick={ () => {this.setState({ dashboardContainer: 'slide_open open' },()=>   setTimeout(()=>this.props.history.push('/about'), 50))}} className='dashboard_buttons'>About</Link>
+                        <a onClick={ () => {this.setState({ dashboardContainer: 'slide_closed_left' },()=>   setTimeout(()=> {this.props.history.push('/about')}, 50))}} className='dashboard_buttons'>About</a>
                         <div className="filler"></div>
                     </div>
                     <div className='dashboard_box'>
@@ -88,7 +88,11 @@ class Dashboard extends Component {
                     </div>
                     <div className='dashboard_box'>
                         <div className="filler"></div>
-                        <Link className='dashboard_buttons'>Hello</Link>
+                        {customer.email? (
+                        <Link to='/cart'className='dashboard_buttons'>Cart</Link>
+                        ) : (
+                        <Link to='/form'className='dashboard_buttons'>Cart</Link>
+                        )}
                     </div>
                 </div>
 

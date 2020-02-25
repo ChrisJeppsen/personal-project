@@ -81,7 +81,8 @@ class Gallery extends Component{
     //submits prints to change the value of prints in DB to true
     handlePrints = (i) => {
       const {prints} = this.state
-      axios.put('/api/printsToggle', {prints}).then(res => {
+      axios.post('/api/printsToggle', {prints}).then(res => {
+        this.props.history.push('/prints')
         this.setState({
           prints: []
         })

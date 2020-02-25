@@ -88,4 +88,7 @@ app.post('/api/printsToggle', productCtrl.printsToggle)
 //CART ENDPOINTS 
 
 app.post('/api/addToCart', cartCtrl.addToCart)
+app.post('/api/payment', cartCtrl.payment)
+app.get('/api/cart/:id', cartCtrl.getCart)
+
 

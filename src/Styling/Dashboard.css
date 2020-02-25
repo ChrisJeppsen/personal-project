@@ -140,4 +140,7 @@
  .open {
   transform: translateX(0);
  }  
- 
+ .slide_open{
+  transform: translateX(100vw);
+  transition: all 150ms ease;
+ }
