@@ -17,6 +17,7 @@ module.exports = {
         res.status(200).send(cart)
     },
     payment: (req, res, next) => {
+        console.log(req.body)
         const amountArray = req.body.amount.toString().split('')
         const pennies = []
         for(var i = 0; i < amountArray.length; i++){
@@ -38,7 +39,7 @@ module.exports = {
         }
         const convertedAmt = parseInt(pennies.join(''))
         console.log(convertedAmt)
-        const charge = stripe.charge.create({
+        const charge = stripe.charges.create({
             amount: convertedAmt,
             currency: 'usd',
             source: req.body.token.id,
@@ -46,11 +47,10 @@ module.exports = {
         }, function(err, charge){
             console.log(req.session.user)
             if(err) return res.sendStatus(500)
-            console.log(charge)
-                const {user_id, game_id} = req.body
+                const {customer_order_id, customer_id} = req.body
                 const db = req.app.get('db')
-                db.purchase.buy_game(game_id, user_id).then(cart => {
-                    req.session.user.game_id = cart[0].game_id
+                db.cart.cart_paid(customer_order_id, customer_id).then(cart => {
+                    req.session.user.customer_order_id = cart[0].customer_order_id
                     console.log(req.session.user)
                     res.status(200).send(req.session.user)
                 })

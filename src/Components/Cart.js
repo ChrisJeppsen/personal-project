@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import {withRouter} from 'react-router-dom'
 import {getProducts} from '../ducks/product_reducer'
+import {getCustomer} from '../ducks/auth_reducer'
 import { render } from '@testing-library/react'
 import axios from 'axios'
 import {connect} from 'react-redux';
 import '../Styling/Cart.css';
-import stripe from './StripeKey'
+import stripeKey from './StripeKey'
 import StripeCheckout from 'react-stripe-checkout'
 
 class Cart extends Component{
@@ -38,10 +39,12 @@ class Cart extends Component{
     }
     onToken = (token) => {
         token.card = void 0
-        let cost = this.state.price * 100
+        let cost = this.state.totalPrice.toFixed(2)
         console.log(cost)
-        axios.post('/api/payment', {token, amount: cost, user_id: this.state.user_id, game_id: this.state.game_id}).then(res => {
-            this.props.history.push('/')
+        axios.post('/api/payment', {token, amount: cost, customer_order_id: this.props.customer.customer_order_id, customer_id: this.props.customer.customer_id}).then(res => {
+            this.props.getCustomer(res.data)
+            alert('payment complete')
+            this.props.history.push('/allPrints')
         })
     }
     render(){
@@ -68,7 +71,11 @@ class Cart extends Component{
                 {mappedCart}
                 <div>Total: ${this.state.totalPrice}</div>
                 {/* <div  className='purchase'> Purchase</div> */}
-                <StripeCheckout className='purchase' token={this.onToken} stripeKey={stripe.publicKey}amount={this.state.price *100}/>
+                <StripeCheckout 
+                className='purchase' 
+                token={this.onToken} 
+                stripeKey='pk_test_hnvj6el1mybT3XWAU47a8GFP00b9hNCl3F'
+                amount={this.state.price *100}/>
             </div>
         )
     }
@@ -81,4 +88,4 @@ function mapStateToProps(state) {
     })
 }   
 
-export default withRouter(connect(mapStateToProps, {getProducts})(Cart))
+export default withRouter(connect(mapStateToProps, {getProducts, getCustomer})(Cart))

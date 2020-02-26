@@ -9,7 +9,7 @@
     
 }
 .product_inner_container{
-    height: 70vh;
+    height: auto;
     width: 90%;
     background-color: gwhite;
     display: flex;
@@ -43,5 +43,44 @@ img{
     width:75px;
     opacity: 50;
     background-color: white;
+}
+.button_container {
+    height: 100px;
+    width: 100px;
+}
+.edit_img_container{
+    height: 250px;
+    width: 250px;
+    background-color: green;
+    
+    
+}
+#container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color:transparent;
+    position: fixed;
+    top: 0px;
+}
+.information_container{
+    height: 300px;
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    background-color: red;
+}
+#info_input{
+    height: 40px;
+    width: 150px;
+}
+#info_button{
+    height: 50px;
+    width: 100px;
 }
  

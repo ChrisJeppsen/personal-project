@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import '../Styling/Products.css'
 import axios from 'axios'
 import AddToCart from './AddToCart'
-
+import EditProducts from './EditProducts'
 
 class Products extends Component {
     constructor(props) {
@@ -14,7 +14,8 @@ class Products extends Component {
 
         this.state = {
             addToggle: false,
-            qty: ''
+            qty: '',
+            editToggle: false
         }
     }
     componentDidMount() {
@@ -23,11 +24,20 @@ class Products extends Component {
             this.props.getProducts(res.data)
         })
     }
-    handleToggle = (id) => {
+    handleToggle = (id,) => {
         this.setState({
             addToggle: !this.state.addToggle
         })
     }
+    handleEditToggle = (id, image) => {
+        
+        this.setState({
+            editToggle: !this.state.editToggle,
+            id,
+            image
+        })
+    }
+     
     handleInput = (e) => {
         const { name, value } = e.target
         this.setState({
@@ -46,12 +56,11 @@ class Products extends Component {
                     this.props.history.push('/cart')
                 })
             ) : (
-                this.props.history.push('/form')
-            )
+                    this.props.history.push('/form')
+                )
         }
     }
     render() {
-        console.log(this.props)
         //maps over products where prints boolean is true
         const image = this.props.products.map((e, i) => {
             if (e.prints) {
@@ -60,7 +69,14 @@ class Products extends Component {
                         <img className='product_image' src={e.product_image} />
                         <div className='add_to_cart'>
                             {!this.state.addToggle ? (
-                                <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button>
+                                // this.props.customer.admin === 'true'
+                                 true ? 
+                                    <div>
+                                        {/* <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button> */}
+                                        <button >Edit</button>
+                                    </div>
+                                 : <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button>
+                                    
                             ) : (
                                     <div>
                                         <input name='qty' value={this.state.qty} placeholder='quantity' onChange={(e) => this.handleInput(e)} />
@@ -72,18 +88,30 @@ class Products extends Component {
                 )
             }
         })
+        console.log(this.state.editToggle)
         return (
 
             <div>
                 <div className='product_container'>
-                    {/* {image} */}
                     {this.props.products.map((e, i) => (
                         <>
                             {e.prints && (
-                        <AddToCart e={e} key={e.product_id} handleInput={this.handleInput} addToCart={this.addToCart}/>
-                    )}</>
+                                <AddToCart 
+                                handleEditToggleFn={this.handleEditToggle} 
+                                customer={this.props.customer} 
+                                e={e} key={e.product_id} 
+                                handleInput={this.handleInput} 
+                                addToCart={this.addToCart}
+                                 />
+                            )}</>
                     ))}
                 </div>
+                {this.state.editToggle && (
+                        <EditProducts 
+                        id={this.state.id}
+                        image={this.state.image}
+                        editToggleFn={this.handleEditToggle}/>
+                )}
 
             </div>
 

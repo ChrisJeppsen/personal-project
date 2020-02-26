@@ -84,6 +84,7 @@ app.get('/api/products', productCtrl.allProducts)
 app.post('/api/addProducts', productCtrl.addProducts)
 app.delete('/api/deleteProduct/:id', productCtrl.deleteProduct)
 app.post('/api/printsToggle', productCtrl.printsToggle)
+app.put('/api/editProducts', productCtrl.editProducts)
 
 //CART ENDPOINTS 
 
