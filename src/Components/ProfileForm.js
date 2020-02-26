@@ -117,12 +117,13 @@ class ProfileForm extends Component{
                         <img className='profile_img' src={this.props.customer.authreducer.customer.image_url || 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'}/>        
                     </div> 
                     <div className='profile_change_container'>
-                        <input onChange={(e) => this.handleInput(e)} name='profileImg' value={this.state.profileImg} placeholder='Profile Image Url' className= 'profile_change_inputs'/>
+                      <div id='profile_img_text'> Profile Image </div>
+                        {/* <input onChange={(e) => this.handleInput(e)} name='profileImg' value={this.state.profileImg} placeholder='Profile Image Url' className= 'profile_change_inputs'/> */}
                         <input type='file' onChange={(e) => this.getSignedRequest(e.target.files, this.props.customer.authreducer.customer.customer_id)}/>
                         <button onClick={() => this.handleImgSubmit(this.state.profileImg)}>Submit</button>
                          {!this.state.passwordToggle ? (
-                        <div>
-
+                        <div className='password_change_container'>
+                            <div>ChangePassword</div>
                             <input onChange={(e) => this.handleInput(e)} placeholder='Current Password'className= 'profile_change_inputs' name='currentPassword' value={this.state.currentPassword}/>
                             <button onClick={() => this.checkPassword()}>Check</button>
                         </div>

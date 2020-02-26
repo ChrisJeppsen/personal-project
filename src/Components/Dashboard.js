@@ -48,10 +48,10 @@ class Dashboard extends Component {
         return (
             <div className={this.state.dashboardContainer}>
                 <div className='dashboard_header'>
-                    <div id='dashboard_title'>Nick's Pix</div>
+                    <div id='dashboard_title'>Nix Pix</div>
                     {!customer.email ? (
                         <div>
-                            <div id='dashboard_logo' onClick={() => this.props.history.push('/form')}>Login</div>
+                            <div id='dashboard_logo' onClick={() => this.props.history.push('/form')}>LOGIN</div>
                         </div>
                     ) : (
                             <div>

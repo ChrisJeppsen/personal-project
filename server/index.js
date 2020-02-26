@@ -91,5 +91,6 @@ app.put('/api/editProducts', productCtrl.editProducts)
 app.post('/api/addToCart', cartCtrl.addToCart)
 app.post('/api/payment', cartCtrl.payment)
 app.get('/api/cart/:id', cartCtrl.getCart)
+app.delete('/api/deleteItem/:id', cartCtrl.deleteItem)
 
 

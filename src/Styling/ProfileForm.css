@@ -32,3 +32,13 @@
 .profile_pic{
     margin-top: 30px;
 }
+#profile_img_text{
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.password_change_container{
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}

@@ -82,7 +82,7 @@ class Gallery extends Component{
     handlePrints = (i) => {
       const {prints} = this.state
       axios.post('/api/printsToggle', {prints}).then(res => {
-        this.props.history.push('/prints')
+        this.props.history.push('/allPrints')
         this.setState({
           prints: []
         })
@@ -157,7 +157,7 @@ class Gallery extends Component{
                
               return(
                 <div className={this.state[`class${i}`] || 'highlighed'} 
-                onKeyDown={() => this.props.customer.admin === true && this.handleDeleteToggle(e.product_id)} 
+                onDoubleClick={() => this.props.customer.admin === true && this.handleDeleteToggle(e.product_id)} 
                 onClick={() => this.props.customer.admin === true && this.handlePrintToggle(i, e.product_id)}>
                       <img id={e.product_image} className='gallery_img' src={e.product_image}/>
                     </div>

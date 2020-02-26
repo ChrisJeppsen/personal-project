@@ -37,6 +37,14 @@ class Cart extends Component{
         const total = cart.reduce((acc, cur) => parseFloat(acc) + parseFloat(cur.price * cur.qty), 0)
         this.setState({totalPrice: total})
     }
+    deleteCartItem = (id) => {
+        axios.delete(`/api/deleteItem/${id}`).then(res => {
+            this.setState({
+                cart: res.data
+            })
+            this.props.history.push('/allPrints')
+        })
+    }
     onToken = (token) => {
         token.card = void 0
         let cost = this.state.totalPrice.toFixed(2)
@@ -48,8 +56,9 @@ class Cart extends Component{
         })
     }
     render(){
-
+        // console.log(this.props)
         const mappedCart = this.state.cart.map((e, i) => {
+            console.log(e)
             return(
                 <div className='cart_container'>
                     <div className='img_container'>
@@ -58,7 +67,7 @@ class Cart extends Component{
                     <div className='info_container'>
                         <p>Price: ${e.price * e.qty}</p>
                         <p>Quantity: {e.qty}</p>
-                        <button>Remove</button>
+                        <button onClick={() => this.deleteCartItem(e.order_item_id)}>Remove</button>
                     </div>
                 </div>
             )
@@ -67,7 +76,7 @@ class Cart extends Component{
          
         return(
             <div className='all_container'> 
-                <div>Your Cart</div>
+                <div id='your_cart'>Your Cart</div>
                 {mappedCart}
                 <div>Total: ${this.state.totalPrice}</div>
                 {/* <div  className='purchase'> Purchase</div> */}

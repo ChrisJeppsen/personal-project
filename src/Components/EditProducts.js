@@ -18,7 +18,7 @@ function EditProducts({id, image, editToggleFn}){
     return(
         <div id='container'>
             <div className='edit_img_container'>
-                <img src={image}></img>
+                <img id='edit_img'src={image}></img>
             </div>
             <div className='information_container'>
                 <input id='info_input'onChange={(e) => handleChange(e)} name='productDescription' value={values.productDescription} placeholder='Product Description'/>

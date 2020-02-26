@@ -24,20 +24,20 @@ class Products extends Component {
             this.props.getProducts(res.data)
         })
     }
-    handleToggle = (id,) => {
+    handleToggle = (id, ) => {
         this.setState({
             addToggle: !this.state.addToggle
         })
     }
     handleEditToggle = (id, image) => {
-        
+
         this.setState({
             editToggle: !this.state.editToggle,
             id,
             image
         })
     }
-     
+
     handleInput = (e) => {
         const { name, value } = e.target
         this.setState({
@@ -70,13 +70,13 @@ class Products extends Component {
                         <div className='add_to_cart'>
                             {!this.state.addToggle ? (
                                 // this.props.customer.admin === 'true'
-                                 true ? 
+                                true ?
                                     <div>
                                         {/* <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button> */}
                                         <button >Edit</button>
                                     </div>
-                                 : <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button>
-                                    
+                                    : <button id={e.product_id} className='add_button' onClick={() => this.handleToggle()}>Add To Cart</button>
+
                             ) : (
                                     <div>
                                         <input name='qty' value={this.state.qty} placeholder='quantity' onChange={(e) => this.handleInput(e)} />
@@ -93,28 +93,27 @@ class Products extends Component {
 
             <div>
                 <div className='product_container'>
+                    <button onClick={() => this.props.history.push('/')}id='product_back_button'>Back</button>
                     {this.props.products.map((e, i) => (
                         <>
                             {e.prints && (
-                                <AddToCart 
-                                handleEditToggleFn={this.handleEditToggle} 
-                                customer={this.props.customer} 
-                                e={e} key={e.product_id} 
-                                handleInput={this.handleInput} 
-                                addToCart={this.addToCart}
-                                 />
+                                <AddToCart
+                                    handleEditToggleFn={this.handleEditToggle}
+                                    customer={this.props.customer}
+                                    e={e} key={e.product_id}
+                                    handleInput={this.handleInput}
+                                    addToCart={this.addToCart}
+                                />
                             )}</>
                     ))}
                 </div>
                 {this.state.editToggle && (
-                        <EditProducts 
+                    <EditProducts
                         id={this.state.id}
                         image={this.state.image}
-                        editToggleFn={this.handleEditToggle}/>
+                        editToggleFn={this.handleEditToggle} />
                 )}
-
             </div>
-
         )
     }
 }

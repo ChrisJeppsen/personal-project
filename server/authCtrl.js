@@ -83,7 +83,7 @@ console.log(email)
         }
         // res.status(400).send('no session found')
     },
-    checkPassword: async (req, res) => {j
+    checkPassword: async (req, res) => {
         const db = req.app.get('db')
         const {currentPassword} = req.body
         console.log(currentPassword)

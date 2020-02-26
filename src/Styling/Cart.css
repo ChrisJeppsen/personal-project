@@ -42,3 +42,13 @@
     font-size: 30px;
     margin: 30px;
 }
+#your_cart{
+    height: 100px;
+    width: 300px;
+    font-size: 50px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
