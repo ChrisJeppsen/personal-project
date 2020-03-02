@@ -9,6 +9,8 @@ const express = require('express'),
         cartCtrl = require('./cartCtrl')
 
         
+        
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(express.json())
 
 const path = require('path'); // Usually moved to the start of file
