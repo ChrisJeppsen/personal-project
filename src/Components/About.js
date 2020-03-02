@@ -28,7 +28,7 @@ class About extends Component{
             <h4>About Nick</h4>
             <div id='about_logo'></div>
             <button onClick={ () => {
-                             this.setState({ aboutContainer: 'slide_open' },()=> setTimeout(()=> this.props.history.push('/'), 50))}}>About</button>
+                             this.setState({ aboutContainer: 'slide_open' },()=> setTimeout(()=> this.props.history.push('/'), 50))}}>Back</button>
             </div>
              
             <p>

@@ -39,7 +39,7 @@ class Gallery extends Component{
     handleSubmit = () => {
         const {name, productImg, description, price} = this.state
         axios.post('/api/addProducts', {name, productImg, description, price}).then(res => {
-            this.props.history.push('/gallery')
+            this.props.history.push('/')
         })
         axios.get('/api/products').then(res => {
           this.props.getProducts(res.data)
@@ -175,6 +175,7 @@ class Gallery extends Component{
                           <input onChange={(e) => this.handleInput(e)} name='price' value={this.state.price}/>
                           <button onClick={() => this.handleSubmit()}>add photo</button>
                           <button onClick={() => this.handlePrints(this.state.prints)}>Add</button>
+                          <button onClick={() => this.props.history.push('/')}>Back</button>
                           <div className='gallery_container'> 
                           {this.state.delete && (
                             <div className='delete_modal'> 

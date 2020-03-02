@@ -11,7 +11,9 @@ const express = require('express'),
         
 app.use(express.json())
 
+const path = require('path'); // Usually moved to the start of file
 
+ 
 
 app.use(session({
         resave: false,
@@ -35,6 +37,10 @@ const {
     AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY
 } = process.env
+
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 app.get('/sign-s3', (req, res) => {
 

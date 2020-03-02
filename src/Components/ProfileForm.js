@@ -55,7 +55,7 @@ class ProfileForm extends Component{
                 input: '',
                 newPassword: ''
             })
-            this.props.history.push('/settings')
+            this.props.history.push('/')
             alert('password successfully changed')
         })
     }
