@@ -2,7 +2,7 @@ import React, {Component} from 'react';
  // import './App.css';
 // import Dashboard from './Components/Dashboard'
 import {HashRouter} from 'react-router-dom'
-import Routes from './Routes'
+import Routes from './routes.js'
 import {Provider} from 'react-redux'
 import store from './ducks/store'
 
