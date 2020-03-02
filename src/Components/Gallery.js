@@ -24,7 +24,9 @@ class Gallery extends Component{
 
     componentDidMount(){
         axios.get('/api/products').then(res =>{
+          console.log(res)
             this.props.getProducts(res.data)
+
               
         })
          

@@ -11,6 +11,7 @@ const express = require('express'),
         
         
 app.use( express.static( `${__dirname}/../build` ) );
+
 app.use(express.json())
 
 const path = require('path'); // Usually moved to the start of file
@@ -40,9 +41,7 @@ const {
     AWS_SECRET_ACCESS_KEY
 } = process.env
 
-app.get('*', (req, res)=>{
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-});
+ 
 
 app.get('/sign-s3', (req, res) => {
 
@@ -101,4 +100,7 @@ app.post('/api/payment', cartCtrl.payment)
 app.get('/api/cart/:id', cartCtrl.getCart)
 app.delete('/api/deleteItem/:id', cartCtrl.deleteItem)
 
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
